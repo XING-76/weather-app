@@ -1,0 +1,21 @@
+<template>
+    <div
+        class="bg-slate-950 text-white flex flex-col gap-4 py-4 px-6 mb-20 min-h-[300px] no-scrollbar overflow-y-scroll shadow-xl"
+        :class="!weatherHistoryRecordList.length ? 'justify-center' : ''"
+    >
+        <div v-show="!weatherHistoryRecordList.length" class="text-xl">
+            No history...
+        </div>
+        <WeatherItem :data="weatherHistoryRecordList" />
+    </div>
+</template>
+
+<script setup lang="ts">
+import WeatherItem from '@/components/WeatherItem.vue';
+import { useMainStore } from '@/store';
+import { storeToRefs } from 'pinia';
+
+const store = useMainStore();
+
+const { weatherHistoryRecordList } = storeToRefs(store);
+</script>
