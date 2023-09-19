@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { DEFAULT_LOCAL_STORAGE_TIMEOUT } from '@/configs/serviceConfig';
 import { CityInformation, CityForecastListType } from './types';
 import { initCityInformationItem, initCityForecastList } from './data';
 import ApiRequest from '@/service/apiRequest';
@@ -15,21 +16,29 @@ export const useMainStore = defineStore('main', () => {
     const forecastItemShow = ref<string>('10');
     const isLoading = ref<boolean>(false);
     const weatherHistoryRecordList = ref([] as Array<CityInformation>);
+    const weatherHistoryRecordArray = ref([] as Array<string>);
 
     const setLoading = () => {
         isLoading.value = !isLoading.value;
     };
 
-    const handleSearchCurrent = async (city: string) => {
+    const handleSearchCurrent = async (data: {
+        city: string;
+        isList: boolean;
+    }) => {
         try {
+            const { city, isList } = data;
+
             const response: Promise<any> = await ApiRequest.searchToday(city);
 
             const convertedResponse =
                 convertResponseOfSearchOnCurrentAPI(response);
 
-            cityInformationItem.value = convertedResponse;
+            if (!isList) cityInformationItem.value = convertedResponse;
 
-            handleSetWeatherHistoryRecordList(convertedResponse);
+            if (isList) {
+                return convertedResponse;
+            }
         } catch (err) {
             console.log(err);
         }
@@ -65,23 +74,58 @@ export const useMainStore = defineStore('main', () => {
         forecastItemShow.value = day;
     };
 
-    const handleSetWeatherHistoryRecordList = (data: CityInformation) => {
-        const list = weatherHistoryRecordList.value;
+    const handleSetWeatherHistoryRecordList = async (data: Array<string>) => {
+        let output = [];
 
-        const isCityExists = list.some(
-            (item) => item.cityName === data.cityName
-        );
+        for (let i = 0; i < data.length; i++) {
+            const dataItem = {
+                city: data[i],
+                isList: true,
+            };
+            const response = await handleSearchCurrent(dataItem);
 
-        if (list.length < 5 && !isCityExists) {
-            list.push(data);
+            output.push(response as CityInformation);
         }
 
-        if (list.length >= 5 && !isCityExists) {
-            list.pop();
-            list.unshift(data);
+        weatherHistoryRecordList.value = output;
+    };
+
+    const handleSetWeatherHistoryRecordArray = (data: string) => {
+        let list = weatherHistoryRecordArray.value;
+
+        const isCityExistIndex = list.indexOf(data);
+
+        if (isCityExistIndex !== -1) {
+            list.splice(isCityExistIndex, 1);
         }
 
-        weatherHistoryRecordList.value = list;
+        list.unshift(data);
+
+        if (list.length > 5) list.pop();
+
+        weatherHistoryRecordArray.value = list;
+
+        const expiration = new Date().getTime() + DEFAULT_LOCAL_STORAGE_TIMEOUT;
+        const localData = { list: list.join(','), expiration };
+
+        localStorage.setItem('historyRecord', JSON.stringify(localData));
+    };
+
+    const handleCheckIfExpired = () => {
+        const historyRecord = localStorage?.getItem('historyRecord');
+
+        if (historyRecord) {
+            const { list, expiration } = JSON.parse(historyRecord);
+
+            const now = new Date().getTime();
+
+            if (now > expiration) {
+                localStorage.removeItem('historyRecord');
+                return null;
+            }
+
+            weatherHistoryRecordArray.value = list.split(',');
+        }
     };
 
     return {
@@ -90,11 +134,14 @@ export const useMainStore = defineStore('main', () => {
         forecastItemShow,
         isLoading,
         weatherHistoryRecordList,
+        weatherHistoryRecordArray,
         setLoading,
         handleSearchCurrent,
         handleSearchHour,
         handleSearchDays,
         handleSetDaysItemShow,
         handleSetWeatherHistoryRecordList,
+        handleSetWeatherHistoryRecordArray,
+        handleCheckIfExpired,
     };
 });

@@ -24,10 +24,12 @@ const handleOnSearch = async (city: string) => {
         const response: any = await ApiRequest.searchExist(city);
 
         if (response.length) {
+            const cityName = response[0].name;
+
             router.push({
                 name: 'City',
                 params: {
-                    cityName: city,
+                    cityName: cityName,
                 },
             });
         }

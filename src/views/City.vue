@@ -62,7 +62,9 @@ const handleOnSearchDay = async () => {
     try {
         const dayObj = { city: city, day: '10' };
 
-        await store.handleSearchCurrent(city);
+        await store.handleSearchCurrent({ city: city, isList: false });
+
+        store.handleSetWeatherHistoryRecordArray(city);
 
         await store.handleSearchDays(dayObj);
 

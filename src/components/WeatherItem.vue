@@ -27,10 +27,15 @@
 import { useRouter } from 'vue-router';
 import { CityInformation } from '@/store/types';
 import { toRefs, PropType } from 'vue';
+import { useMainStore } from '@/store';
 
 const router = useRouter();
 
+const store = useMainStore();
+
 const handleOnClick = (city: string) => {
+    store.handleSetWeatherHistoryRecordArray(city);
+
     router.push({
         name: 'City',
         params: {
