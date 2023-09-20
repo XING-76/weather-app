@@ -168,7 +168,7 @@ export const convertResponseOfSearchOnDaysAPI = (response: any) => {
             icon: icon,
             text: text,
             rainChance:
-                daily_chance_of_rain > 0 ? `${daily_chance_of_rain}℅` : '',
+                daily_chance_of_rain > 0 ? `${daily_chance_of_rain}%` : '',
             maxTemperature: maxTemperature,
             minTemperature: minTemperature,
         };
