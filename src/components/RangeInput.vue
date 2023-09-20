@@ -1,4 +1,9 @@
-<template>
+<template lang="pug">
+.rounded-full.bg-blue-950.h-3.flex(class='w-[40%]')
+    .h-3.grow(v-for='item in range', :key='item', :class='getClass(item)')
+</template>
+
+<!-- <template>
     <div class="rounded-full bg-blue-950 h-3 w-[40%] flex">
         <div
             v-for="item in range"
@@ -7,7 +12,7 @@
             :class="getClass(item)"
         ></div>
     </div>
-</template>
+</template> -->
 
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';

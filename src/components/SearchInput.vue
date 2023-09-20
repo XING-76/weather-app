@@ -1,4 +1,9 @@
-<template>
+<template lang="pug">
+.mb-4
+    input.bg-gray-50.text-gray-900.text-center.rounded-xl(type='text', class='placeholder:text-center w-3/4 p-2.5 focus:outline-none', placeholder='search city name', v-model='cityName', @keyup.enter='handleOnSearch(cityName)')
+</template>
+
+<!-- <template>
     <div class="mb-4">
         <input
             type="text"
@@ -8,7 +13,7 @@
             @keyup.enter="handleOnSearch(cityName)"
         />
     </div>
-</template>
+</template> -->
 
 <script setup lang="ts">
 import { ref } from 'vue';

@@ -1,4 +1,19 @@
-<template>
+<template lang="pug">
+div(v-if='!isLoading')
+    .w-12.h-12.text-white.cursor-pointer(@click='handleClickBack')
+        BackIcon
+    .sticky.top-0
+        CityInformationBox(:isVisible='isVisible')
+    .text-white.text-xs.p-6
+        .sticky.top-24.mb-4
+            CityDayList(:data='cityDayList', :isVisible='isVisible')
+        .sticky.top-48.max-h-full.no-scrollbar.overflow-y-scroll
+            CityForecastList(:city='city')
+    LinkBack
+loading(v-if='isLoading')
+</template>
+
+<!-- <template>
     <div v-if="!isLoading">
         <div
             class="w-12 h-12 text-white cursor-pointer"
@@ -24,7 +39,7 @@
         <LinkBack />
     </div>
     <Loading v-if="isLoading" />
-</template>
+</template> -->
 
 <script setup lang="ts">
 import BackIcon from '@/components/icons/BackIcon.vue';

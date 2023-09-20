@@ -1,4 +1,13 @@
-<template>
+<template lang="pug">
+div(v-if='!isLoading')
+    .text-white.text-2xl.pt-16.pb-6.px-6 Weather Forecast
+    SearchInput
+    WeatherList
+    LinkBack
+loading(v-if='isLoading')
+</template>
+
+<!-- <template>
     <div v-if="!isLoading">
         <div class="text-white text-2xl pt-16 pb-6 px-6">Weather Forecast</div>
         <SearchInput />
@@ -6,7 +15,7 @@
         <LinkBack />
     </div>
     <Loading v-if="isLoading" />
-</template>
+</template> -->
 
 <script setup lang="ts">
 import LinkBack from '@/components/LinkBack.vue';
