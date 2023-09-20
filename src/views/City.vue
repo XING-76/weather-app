@@ -13,34 +13,6 @@ div(v-if='!isLoading')
 loading(v-if='isLoading')
 </template>
 
-<!-- <template>
-    <div v-if="!isLoading">
-        <div
-            class="w-12 h-12 text-white cursor-pointer"
-            @click="handleClickBack"
-        >
-            <BackIcon />
-        </div>
-
-        <div class="sticky top-0">
-            <CityInformationBox :isVisible="isVisible" />
-        </div>
-        <div class="text-white text-xs p-6">
-            <div class="sticky top-24 mb-4">
-                <CityDayList :data="cityDayList" :isVisible="isVisible" />
-            </div>
-
-            <div
-                class="sticky top-48 max-h-full no-scrollbar overflow-y-scroll"
-            >
-                <CityForecastList :city="city" />
-            </div>
-        </div>
-        <LinkBack />
-    </div>
-    <Loading v-if="isLoading" />
-</template> -->
-
 <script setup lang="ts">
 import BackIcon from '@/components/icons/BackIcon.vue';
 import LinkBack from '@/components/LinkBack.vue';

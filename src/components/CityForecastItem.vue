@@ -12,32 +12,6 @@
     div {{ item.maxTemperature }}°
 </template>
 
-<!-- <template>
-    <div
-        class="flex justify-between items-center gap-4 md:gap-0 text-base md:text-xl mb-2 md:p-6 p-3"
-        v-for="(item, index) in items"
-        :key="index"
-    >
-        <div class="basis-14 text-start">{{ item.weekDay }}</div>
-        <div class="w-10 h-10">
-            <img :src="item.icon" :alt="item.text" />
-            <span class="text-xs text-sky-500" v-if="item.rainChance">{{
-                item.rainChance
-            }}</span>
-        </div>
-        <div>{{ item.minTemperature }}°</div>
-
-        <RangeInput
-            :min="min"
-            :max="max"
-            :minVal="item.minTemperature"
-            :maxVal="item.maxTemperature"
-        />
-
-        <div>{{ item.maxTemperature }}°</div>
-    </div>
-</template> -->
-
 <script setup lang="ts">
 import RangeInput from '@/components/RangeInput.vue';
 import { CityForecastListType } from '@/store/types';

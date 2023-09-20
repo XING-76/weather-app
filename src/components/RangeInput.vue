@@ -3,17 +3,6 @@
     .h-3.grow(v-for='item in range', :key='item', :class='getClass(item)')
 </template>
 
-<!-- <template>
-    <div class="rounded-full bg-blue-950 h-3 w-[40%] flex">
-        <div
-            v-for="item in range"
-            :key="item"
-            class="h-3 grow"
-            :class="getClass(item)"
-        ></div>
-    </div>
-</template> -->
-
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
 
