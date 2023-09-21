@@ -6,28 +6,29 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import ApiRequest from '@/service/apiRequest';
+import { useMainStore } from '@/store';
 
 const router = useRouter();
+const store = useMainStore();
 
 const cityName = ref('');
 
 const handleOnSearch = async (city: string) => {
     try {
-        const response: any = await ApiRequest.searchExist(city);
+        const response: string = await store.handleCheckErrorRoute(city);
 
-        if (response.length) {
-            const cityName = response[0].name;
+        const isExists = response.length;
 
+        if (isExists) {
             router.push({
                 name: 'City',
                 params: {
-                    cityName: cityName,
+                    cityName: response,
                 },
             });
         }
 
-        if (!response.length) {
+        if (!isExists) {
             alert('City not exist!');
         }
     } catch (err) {

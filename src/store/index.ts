@@ -128,6 +128,27 @@ export const useMainStore = defineStore('main', () => {
         }
     };
 
+    const handleCheckErrorRoute = async (city: string) => {
+        try {
+            const response: any = await ApiRequest.searchExist(city);
+
+            const isExists = response.length;
+
+            if (isExists) {
+                const cityName = response[0].name;
+
+                return cityName;
+            }
+
+            if (!isExists) {
+                return '';
+            }
+        } catch (err) {
+            console.log(err);
+            return '';
+        }
+    };
+
     return {
         cityInformationItem,
         forecastList,
@@ -143,5 +164,6 @@ export const useMainStore = defineStore('main', () => {
         handleSetWeatherHistoryRecordList,
         handleSetWeatherHistoryRecordArray,
         handleCheckIfExpired,
+        handleCheckErrorRoute,
     };
 });
