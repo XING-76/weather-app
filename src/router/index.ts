@@ -15,7 +15,7 @@ const router = createRouter({
             path: '/city/:cityName',
             name: 'City',
             component: City,
-            async beforeEnter(to) {
+            async beforeEnter(to, _, next) {
                 const cityName = to.params.cityName as string;
 
                 try {
@@ -24,6 +24,14 @@ const router = createRouter({
                     );
 
                     const isExists = response.length;
+
+                    if (isExists) {
+                        const cityName = response[0].name;
+
+                        to.params.cityName = cityName;
+
+                        next();
+                    }
 
                     if (!isExists) {
                         return { name: 'Home' };
