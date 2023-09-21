@@ -7,15 +7,24 @@
 import { computed, toRefs } from 'vue';
 
 const getClass = (num: number) => {
-    if (num > minVal.value && num < maxVal.value) {
-        return 'bg-cyan-500';
+    const baseClass = 'bg-cyan-500';
+
+    if (num === minVal.value && num === maxVal.value) {
+        return `${baseClass} rounded-full`;
     }
+
     if (num === minVal.value) {
-        return 'bg-cyan-500 rounded-l-full';
+        return `${baseClass} rounded-l-full`;
     }
+
     if (num === maxVal.value) {
-        return 'bg-cyan-500 rounded-r-full';
+        return `${baseClass} rounded-r-full`;
     }
+
+    if (num > minVal.value && num < maxVal.value) {
+        return baseClass;
+    }
+
     return '';
 };
 
