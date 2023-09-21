@@ -91,6 +91,8 @@ export const useMainStore = defineStore('main', () => {
     };
 
     const handleSetWeatherHistoryRecordArray = (data: string) => {
+        handleCheckIfExpired();
+
         let list = weatherHistoryRecordArray.value;
 
         const isCityExistIndex = list.indexOf(data);
