@@ -10,7 +10,7 @@ div(v-if='!isLoading')
         .sticky.top-48.max-h-full.no-scrollbar.overflow-y-scroll
             CityForecastList(:city='city')
     LinkBack
-loading(v-if='isLoading')
+Loading(v-if='isLoading')
 </template>
 
 <script setup lang="ts">

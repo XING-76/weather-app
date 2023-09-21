@@ -4,7 +4,7 @@ div(v-if='!isLoading')
     SearchInput
     WeatherList
     LinkBack
-loading(v-if='isLoading')
+Loading(v-if='isLoading')
 </template>
 
 <script setup lang="ts">
