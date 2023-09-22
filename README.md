@@ -1,6 +1,6 @@
 # <a href=https://weather-app-one-xi-17.vercel.app/ target=_blank>weather-app</a>
 
--   專案使用[Free Weather API](https://www.weatherapi.com/)提供的服務
+-   專案使用 [Free Weather API](https://www.weatherapi.com/) 提供的服務
 
 ## 簡介
 
