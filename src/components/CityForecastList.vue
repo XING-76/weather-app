@@ -8,7 +8,7 @@
         div
             select.text-center.text-white.bg-zinc-600.appearance-none.rounded.p-1(class='focus:outline-none', @change='handleOnChangeDays')
                 option(value='', hidden) 天數(選單)
-                option(v-for='index in 10', :value='index') {{ index }} 天
+                option(v-for='index in 3', :value='index') {{ index }} 天
     hr.h-px.bg-gray-300.border-0.mb-2
     CityForecastItem(:data='forecastList')
 </template>
