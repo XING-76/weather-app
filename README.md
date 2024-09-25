@@ -1,12 +1,12 @@
 # <a href=https://weather-app-one-xi-17.vercel.app/ target=_blank>weather-app</a>
 
--   專案使用 [Free Weather API](https://www.weatherapi.com/) 提供的服務
+-   This project utilizes services provided by [Free Weather API](https://www.weatherapi.com/).
 
-## 簡介
+## Introduction
 
--   世界天氣查詢
+-   Global weather search.
 
-## 使用技術
+## Tech Stack
 
 -   Vite
 -   Vue3
@@ -18,6 +18,6 @@
 -   Pinia
 -   axios
 
-## 聲明
+## Declaration
 
-本專案內圖片、內容等，純屬個人使用，不做任何商業用途
+All images and text content within this project are for personal use only and not for commercial purposes.
